@@ -4,7 +4,7 @@ These are maintainer notes, not prerequisites for loading a skill. Each port sta
 
 | Cursor concept | Amp equivalent and limit |
 | --- | --- |
-| Slash command, sticky `poteto-mode` | Say “poteto mode” in a request to load the `poteto-mode` skill. Once loaded it stays in the thread’s context and keeps applying until the user says to stop or the thread is compacted. Ten of the 22 upstream playbooks are ported; the rest depend on Cursor features or the omitted skills. Other skills load by name or by description match. |
+| Slash command, sticky `poteto-mode` | Invoke the skill in chat on any model, or install the [Poteto plugin](plugins/poteto.ts) for a discoverable launcher mode. For another model, start a regular child on that model with an explicit skill instruction. |
 | `poteto-agent`, `Task`, `readonly`, background workers | Use `Task` for bounded work when delegation is warranted. Put read-only scope or writable paths in the brief; that is an instruction, not an access control. Use the tool’s native async mode for independent work. |
 | Per-worker `model` / review panel | `Task` inherits the thread’s model and effort. For an explicitly requested multi-model panel, use independently owned threads with the requested available models. Give each the same exact diff and base, transferring unpushed work first. If unavailable, disclose the gap rather than calling one model a panel. |
 | `AskQuestion`, todo tool | Use `ask_user_choice` only when the user asked to be questioned and concrete options fit. Otherwise ask a blocking question in the reply. No todo tool is required. |

@@ -1,11 +1,19 @@
 ---
 name: poteto-mode
-description: Runs a task through poteto's rigorous engineering playbooks, routing to the astack skills each step needs. Use only when the user says poteto mode, /poteto-mode, or asks to work in poteto's style.
+description: Applies the Poteto workflow in this thread or starts a requested thread with the Poteto agent. Use for explicit Poteto requests, including the legacy phrase “poteto mode”.
 ---
 
-# Poteto mode
+# Poteto workflow
 
-Poteto mode picks one playbook for the task, follows its steps, and loads the astack skill each step names. Once invoked, keep applying it to later requests in this thread until the user says to stop.
+Poteto picks one playbook for the task, follows its steps, and loads the astack skill each step names. Once invoked, keep applying it to later requests in this thread until the user says to stop.
+
+## Starting a separate thread
+
+“Start a thread with the Poteto agent” (formerly “start a thread in Poteto mode”) asks the launcher to create one thread, not to do the work here. Use `create_thread` with the requested project and task. Pass the repository names, PR or issue references and any constraints the child needs. Start its prompt with “Load the poteto-mode skill and handle this task in this thread:” followed by the task itself, not the instruction to start a thread. Return the actual thread link. “Use the Poteto workflow” or “poteto mode: <task>” without a launch request stays here.
+
+If the user names a model, resolve it with `list_agent_modes` for the destination and pass its key as `model`; pass `effort` only if requested and supported. Otherwise, for a request for the Poteto agent or the legacy “thread in Poteto mode”, use the registered Poteto key from that list. If Poteto isn't listed, omit `model` and keep the skill instruction in the child's prompt. A missing plugin is not a missing model request. If an explicitly requested model or the destination project is unavailable, report that limitation instead of silently substituting another.
+
+For independently owned child work launched by Poteto, honor the user's model first. Otherwise use `openai/gpt-6.2-sol` for implementation and routine follow-up, or `anthropic/claude-opus-5-5` for an independent design or code review. Check availability in the destination first; if the role default is unavailable, omit `model` and disclose the fallback. Include the Poteto skill instruction when the child should follow its playbooks. These defaults choose a model for a warranted child thread; they do not turn every playbook step into one. `Task` workers inherit the current thread's model and effort.
 
 ## Start every task this way
 
@@ -37,7 +45,7 @@ Read `playbooks/<file>` for the matching task:
 - Use Task for independent slices or bulky reads, per `partitioning-work`. Run a bake-off with `comparing-candidates` only when the user asks for one or the playbook calls for it. You own every delegated result: review the diff and run the checks yourself.
 - For docs, PR descriptions, and commit messages, load `editing-engineering-docs`.
 - Answer with your real judgment. When asked whether to do something, declining or pushing back is a valid answer.
-- Poteto mode does not widen authority. Pushing, merging, opening or commenting on pull requests, and other shared or irreversible actions still need the user's request or approval.
+- The Poteto workflow does not widen authority. Pushing, merging, opening or commenting on pull requests, and other shared or irreversible actions still need the user's request or approval.
 
 ## Writing the reply
 

@@ -2,15 +2,19 @@
 
 Selected engineering workflows from Lauren Tan’s [pstack](https://github.com/cursor/plugins/tree/ca782ed8b3c2c521cead8e1720d55c3a5dbf2347/pstack), adapted for Amp under the [MIT license](LICENSE). Each skill works on its own, and [poteto-mode](.agents/skills/poteto-mode/SKILL.md) orchestrates them.
 
-## Use Poteto mode
+## Use the Poteto workflow
 
-Open this checkout in Amp and start a request with `poteto mode:` followed by your task. It’s a chat instruction, not a model selector setting. Amp picks a [playbook](.agents/skills/poteto-mode/SKILL.md#playbooks) and loads the skills it needs as it goes. You don’t have to name those skills yourself.
+**In this thread:** “Use the Poteto workflow to review these PRs.” Your current model follows the [playbook](.agents/skills/poteto-mode/SKILL.md#playbooks). The installed skill ID is still `poteto-mode`, and existing `poteto mode:` prompts still work.
 
-- **Fix a bug:** “poteto mode: the CSV export drops orders on the last page. Reproduce it, add a regression test, and fix it.” The [bug-fix playbook](.agents/skills/poteto-mode/playbooks/bug-fix.md) checks the same reproduction before and after the fix.
-- **Investigate without edits:** “poteto mode: trace why exports sometimes time out. Report the evidence without changing code.”
-- **Plan without implementing:** “poteto mode: plan the API migration in phases. Give each phase a verification step; don’t implement yet.”
+**In a new thread with the default Poteto model:** “Start a thread with the Poteto agent for these PRs.” The optional [Poteto agent plugin](plugins/poteto.ts) registers **Poteto** under **Your Agents** and uses GPT-6.2 Astra. Install it alongside the astack skills to get the picker entry.
 
-Amp follows Poteto mode for later requests while it has that instruction in the thread’s context. Say `stop poteto mode` to turn it off. Repeat `poteto mode:` in a new thread or if the current thread loses the context. The mode doesn’t authorize pushing, opening or merging PRs, or posting comments.
+**In a new thread with your choice of model:** “Start a Claude Opus 5.5 thread and use the Poteto workflow to review these PRs.” Opus runs the thread; Poteto guides the work. This only needs the skills. See the [child-thread rules](.agents/skills/poteto-mode/SKILL.md#starting-a-separate-thread) for model defaults when Poteto delegates work.
+
+- **Fix a bug:** “Use Poteto to reproduce and fix the missing last page of the CSV export.” The [bug-fix playbook](.agents/skills/poteto-mode/playbooks/bug-fix.md) checks the same reproduction before and after the fix.
+- **Investigate without edits:** “Use Poteto to trace why exports sometimes time out. Report the evidence without changing code.”
+- **Plan without implementing:** “Use Poteto to plan the API migration in phases. Give each phase a verification step; don’t implement yet.”
+
+Amp follows the workflow for later requests while the instruction is in context. Say “stop using Poteto” to turn it off. Invoking the workflow doesn’t authorize pushing, opening or merging PRs, or posting comments.
 
 ### Use it in another project
 
