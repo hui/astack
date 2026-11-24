@@ -10,6 +10,8 @@ Paste this into an Amp thread:
 Install the astack skills from https://github.com/hui/astack as my personal Amp skills.
 ```
 
+For a local checkout, give `amp skill add` the collection path (`/path/to/astack/.agents/skills`), not an individual `SKILL.md` or skill directory. Installing from the collection preserves bundled files such as the verification skill’s worked examples.
+
 No local checkout is required. If you also want **Poteto** in the agent picker, ask Amp to install `plugins/poteto.ts` from the same repository as a personal plugin. The workflow itself only needs the skills.
 
 ## Use the Poteto workflow
