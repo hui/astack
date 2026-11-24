@@ -14,7 +14,9 @@ No local checkout is required. If you also want **Poteto** in the agent picker, 
 
 ## Use the Poteto workflow
 
-**In this thread:** “Use the Poteto workflow to review these PRs.” Your current model follows the [playbook](.agents/skills/poteto-mode/SKILL.md#playbooks). The installed skill ID is still `poteto-mode`, and existing `poteto mode:` prompts still work.
+**Why “Poteto workflow” instead of “Poteto mode”?** Asking Amp to “start a thread in Poteto mode” can make the launcher look for an agent in the model picker. Installing the skill alone doesn’t add a picker entry. Say **Poteto workflow** when you want your chosen model to follow the playbooks, and **Poteto agent** when you want to launch the optional plugin agent. The skill ID remains `poteto-mode` for compatibility, and existing `poteto mode:` prompts still work.
+
+**In this thread:** “Use the Poteto workflow to review these PRs.” Your current model follows the [playbook](.agents/skills/poteto-mode/SKILL.md#playbooks).
 
 **In a new thread with the default Poteto model:** “Start a thread with the Poteto agent for these PRs.” The optional [Poteto agent plugin](plugins/poteto.ts) registers **Poteto** under **Your Agents** and uses GPT-6.2 Astra. Install it alongside the astack skills to get the picker entry.
 
