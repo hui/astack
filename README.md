@@ -1,11 +1,32 @@
 # astack
 
-Selected engineering workflows from Lauren Tan’s [pstack](https://github.com/cursor/plugins/tree/ca782ed8b3c2c521cead8e1720d55c3a5dbf2347/pstack), adapted for Amp under the [MIT license](LICENSE). These are independent project skills, not a plugin or an always-on agent mode.
+Selected engineering workflows from Lauren Tan’s [pstack](https://github.com/cursor/plugins/tree/ca782ed8b3c2c521cead8e1720d55c3a5dbf2347/pstack), adapted for Amp under the [MIT license](LICENSE). Each skill works on its own, and [poteto-mode](.agents/skills/poteto-mode/SKILL.md) orchestrates them.
 
-Open this checkout in Amp and ask, for example, “Use `checking-blast-radius` on this diff. Could an older client still read the response?” To use one skill in another project, run `amp skill add /absolute/path/to/astack/.agents/skills/checking-blast-radius` from that project with this checkout available. In an existing thread, ask Amp to reload skills.
+## Use Poteto mode
+
+Open this checkout in Amp and start a request with `poteto mode:` followed by your task. It’s a chat instruction, not a model selector setting. Amp picks a [playbook](.agents/skills/poteto-mode/SKILL.md#playbooks) and loads the skills it needs as it goes. You don’t have to name those skills yourself.
+
+- **Fix a bug:** “poteto mode: the CSV export drops orders on the last page. Reproduce it, add a regression test, and fix it.” The [bug-fix playbook](.agents/skills/poteto-mode/playbooks/bug-fix.md) checks the same reproduction before and after the fix.
+- **Investigate without edits:** “poteto mode: trace why exports sometimes time out. Report the evidence without changing code.”
+- **Plan without implementing:** “poteto mode: plan the API migration in phases. Give each phase a verification step; don’t implement yet.”
+
+Amp follows Poteto mode for later requests while it has that instruction in the thread’s context. Say `stop poteto mode` to turn it off. Repeat `poteto mode:` in a new thread or if the current thread loses the context. The mode doesn’t authorize pushing, opening or merging PRs, or posting comments.
+
+### Use it in another project
+
+With an astack checkout that includes `poteto-mode`, run this from the target project to install the mode and the skills it calls:
+
+```bash
+amp skill add /absolute/path/to/astack/.agents/skills
+```
+
+In an existing thread, ask Amp to reload skills. If you only need one skill, point `amp skill add` at that skill’s directory instead, then call it directly (for example, “Use `checking-blast-radius` on this diff. Could an older client still read the response?”).
+
+## Skill catalog
 
 | Upstream workflow | Amp skill | Use it for |
 | --- | --- | --- |
+| poteto-mode | [poteto-mode](.agents/skills/poteto-mode/SKILL.md) | Route a task to a playbook that calls the skills below. |
 | why | [tracing-decisions](.agents/skills/tracing-decisions/SKILL.md) | Recover the historical reason for a choice. |
 | blast-radius | [checking-blast-radius](.agents/skills/checking-blast-radius/SKILL.md) | Check the assumption a change’s safety depends on. |
 | architect | [sketching-interfaces](.agents/skills/sketching-interfaces/SKILL.md) | Compare two API shapes from a caller’s perspective. |
