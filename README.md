@@ -2,6 +2,16 @@
 
 Selected engineering workflows from Lauren Tan’s [pstack](https://github.com/cursor/plugins/tree/ca782ed8b3c2c521cead8e1720d55c3a5dbf2347/pstack), adapted for Amp under the [MIT license](LICENSE). Each skill works on its own, and [poteto-mode](.agents/skills/poteto-mode/SKILL.md) orchestrates them.
 
+## Install
+
+Paste this into an Amp thread:
+
+```text
+Install the astack skills from https://github.com/hui/astack as my personal Amp skills.
+```
+
+No local checkout is required. If you also want **Poteto** in the agent picker, ask Amp to install `plugins/poteto.ts` from the same repository as a personal plugin. The workflow itself only needs the skills.
+
 ## Use the Poteto workflow
 
 **In this thread:** “Use the Poteto workflow to review these PRs.” Your current model follows the [playbook](.agents/skills/poteto-mode/SKILL.md#playbooks). The installed skill ID is still `poteto-mode`, and existing `poteto mode:` prompts still work.
@@ -15,16 +25,6 @@ Selected engineering workflows from Lauren Tan’s [pstack](https://github.com/c
 - **Plan without implementing:** “Use Poteto to plan the API migration in phases. Give each phase a verification step; don’t implement yet.”
 
 Amp follows the workflow for later requests while the instruction is in context. Say “stop using Poteto” to turn it off. Invoking the workflow doesn’t authorize pushing, opening or merging PRs, or posting comments.
-
-### Use it in another project
-
-With an astack checkout that includes `poteto-mode`, run this from the target project to install the mode and the skills it calls:
-
-```bash
-amp skill add /absolute/path/to/astack/.agents/skills
-```
-
-In an existing thread, ask Amp to reload skills. If you only need one skill, point `amp skill add` at that skill’s directory instead, then call it directly (for example, “Use `checking-blast-radius` on this diff. Could an older client still read the response?”).
 
 ## Skill catalog
 
