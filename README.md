@@ -24,9 +24,16 @@ No local checkout is required. If you also want **Poteto** in the agent picker, 
 
 **In a new thread with your choice of model:** “Start a Claude Opus 5.5 thread and use the Poteto workflow to review these PRs.” Opus runs the thread; Poteto guides the work. This only needs the skills.
 
-### Choose the worker model
+### Set up Poteto's models
 
-When Poteto starts, it asks which model should run the worker threads: the same model as the current thread, another of your top models, any model you type, or no worker threads. The thread you started stays the orchestrator. It picks the playbook, splits the work, starts each worker thread on the chosen model, then copies their changes back and runs the checks itself. Workers report back to the orchestrator and don’t push or comment. To skip the question, name the worker model up front: “Use the Poteto workflow with GPT-6.2 Sol workers to fix the export bug.” To change the orchestrator’s model, switch it in Amp’s model picker. Say “change the Poteto worker model” to choose again. See [the orchestration rules](.agents/skills/poteto-mode/SKILL.md#orchestrate-with-worker-threads) for details.
+When Poteto starts, it asks four questions before the task:
+
+- **Workers:** which model runs the worker threads that do the work: the same model as this thread, another of your top models, any model you type, or no worker threads.
+- **Reviewer:** which model gives a second opinion on contested or risky changes. It suggests a model from another vendor, because it catches mistakes your thread’s model shares.
+- **Budget:** each model’s default reasoning, or `large`, `medium`, or `small`, like pstack’s `/setup-pstack`.
+- **Save:** whether to keep these choices as your default. Poteto saves one `Poteto setup` line in your [personal Amp guidance](https://ampcode.com/settings/instructions#global-agents-md), and later threads offer to reuse it with one click.
+
+The thread you started stays the orchestrator. It picks the playbook, splits the work, starts each worker thread on the chosen model, then copies their changes back and runs the checks itself. Workers never question you, report back to the orchestrator, and don’t push or comment. To skip setup, name the worker model up front: “Use the Poteto workflow with GPT-6.2 Sol workers to fix the export bug.” To change the orchestrator’s model, switch it in Amp’s model picker. Say “change Poteto's models” to set up again, or delete the saved line to forget it. If your project has no verification skill, setup offers once to create one. See [the setup and orchestration rules](.agents/skills/poteto-mode/SKILL.md#set-up-models-before-the-first-task) for details.
 
 - **Fix a bug:** “Use Poteto to reproduce and fix the missing last page of the CSV export.” The [bug-fix playbook](.agents/skills/poteto-mode/playbooks/bug-fix.md) checks the same reproduction before and after the fix.
 - **Investigate without edits:** “Use Poteto to trace why exports sometimes time out. Report the evidence without changing code.”
