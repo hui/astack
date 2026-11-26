@@ -11,7 +11,7 @@ export default function (amp: PluginAPI) {
 	amp.registerAgentMode({
 		key: 'poteto',
 		label: 'Poteto',
-		description: 'Use when asked to start a thread with the Poteto agent, including “start a thread in Poteto mode”. Loads the Poteto workflow.',
+		description: 'Use when asked to start a thread with the Poteto agent. Loads the Poteto workflow.',
 		agent: agent.definition,
 	})
 }
